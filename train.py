@@ -13,9 +13,9 @@ def getloss(pred_y, y):
     pred_y = pred_y.view(-1, len(dic_y))  # 确保形状为 [b * 10, num_classes]
     return nn.CrossEntropyLoss()(pred_y, y.view(-1))  # 将 y 变为 [b * 10]
 try:
-    tran = torch.load('models/lastmodel.pth')
+    tran = torch.load('models/lastmodel.pth')  #如果有就加载模型
 except:
-    tran = Transformer()
+    tran = Transformer()  #没有就创建模型
 optim = torch.optim.Adam(tran.parameters(), lr=2e-3)
 sched = torch.optim.lr_scheduler.StepLR(optim, step_size=3, gamma=0.5)
 epochs = 1000
@@ -37,7 +37,7 @@ for epoch in range(epochs):
 
     if epoch % 10 == 0:
         print(f"第{epoch}轮，损失{all_loss}")
-        torch.save(tran,'models/lastmodel.pth')
+        torch.save(tran,'models/lastmodel.pth')   #保存模型
 
 
         #测试准确率
