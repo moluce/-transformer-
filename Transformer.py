@@ -176,10 +176,6 @@ class Transformer(nn.Module):
         y = self.embedding_layer(y) #[b,10,32]
         y = self.decoder(x,y)#[b,10,32]
         y = self.linear(y)#[b,10,17]
-        # # 使用softmax函数将第3维度转化为概率
-        # y = torch.nn.functional.softmax(y, dim=2)
-        # # 获取概率最高的下标的索引，得到形状为torch.Size([10])的张量
-        # y = torch.argmax(y, dim=2)
 
         return y
 
